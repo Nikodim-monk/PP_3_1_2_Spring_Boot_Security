@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.kata.spring_boot_security.model.Role;
 import ru.kata.spring_boot_security.model.User;
 import ru.kata.spring_boot_security.repository.UserRepository;
 
@@ -15,28 +17,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService {//implements UserDetailsService {
+public class UserService implements UserDetailsService {
+    private final UserRepository repository;
     @Autowired
-    private UserRepository repository;
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
 
-//    public User getByName(String name) {
-//        return repository.getByName(name);
-//    }
+    public User findByUsername(String name) {
+        return repository.findByname(name);
+    }
 
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-////        User user = getByName(username);
-////        if (user == null) {
-////            throw new UsernameNotFoundException(String.format("User '%s' not found", username));
-////        }
-////        return new org.springframework.security.core.userdetails.User(
-////                user.getName(), user.getPassword(), mapRolesToAuthorityes(user.getRoles()));
-//        return null;
-//    }
-//
-//    private Collection<? extends GrantedAuthority> mapRolesToAuthorityes(Collection<Role> roles) {
-//        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
-//    }
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        User user = findByUsername(name);
+        if (user == null) {
+            throw new UsernameNotFoundException(String.format("User '%s' not found", name));
+        }
+        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(),
+                mapRolesToAuthorities(user.getRoles()));
+    }
+
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
+    }
 
     public List<User> getAllUsers() {
         return repository.findAll();

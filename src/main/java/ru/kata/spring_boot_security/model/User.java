@@ -14,7 +14,7 @@ public class User {
     @Column(name = "id")
     private long Id;
     @Column(name = "name")
-    private String Name;
+    private String name;
     @Column(name = "age")
     private int Age;
     @Column(name = "password")
@@ -23,5 +23,5 @@ public class User {
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
+    private Collection<Role> Roles;
 }
