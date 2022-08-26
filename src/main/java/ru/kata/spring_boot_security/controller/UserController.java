@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.kata.spring_boot_security.model.User;
 import ru.kata.spring_boot_security.service.UserService;
 
+import java.security.Principal;
+
 
 @Controller
 public class UserController {
@@ -47,8 +49,9 @@ public class UserController {
         return "redirect:/admin";
     }
     @GetMapping("/user")
-    public String printAllUsers() {
-//        model.addAttribute("users", service.getAllUsers());
+    public String printAllUsers(Principal principal,ModelMap model) {
+        User user=service.findByUsername(principal.getName());
+        model.addAttribute("user", user);
         return "user_view";
     }
 

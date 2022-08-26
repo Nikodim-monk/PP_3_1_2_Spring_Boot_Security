@@ -18,11 +18,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
-    private final UserRepository repository;
     @Autowired
-    public UserService(UserRepository repository) {
-        this.repository = repository;
-    }
+    private UserRepository repository;
 
     public User findByUsername(String name) {
         return repository.findByname(name);

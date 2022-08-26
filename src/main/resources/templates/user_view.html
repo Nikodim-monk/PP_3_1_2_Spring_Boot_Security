@@ -2,17 +2,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User</title>
+    <title>Просмотр сведений по пользователю</title>
 </head>
 <body>
-<h1>Просмотр сведений по пользователю</h1>
-<!--<form th:method="POST" th:action="@{/update}" th:object="${user}">-->
-<!--    <label for="name">Новое имя:</label>-->
-<!--    <input type="text" th:field="*{name}" id="name">-->
-<!--    <br/>-->
-<!--    <label for="age">Возраст:</label>-->
-<!--    <input type="text" th:field="*{age}" id="age">-->
-<!--    <input type="hidden" th:field="*{id}" id="id">-->
+<table th:border="1">
+    <thead>
+    <tr>
+        <th>№ п/п</th>
+        <th>Имя</th>
+        <th>Возраст</th>
+    </tr>
+    </thead>
+    <tr th:align="center">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getAge()}"></td>
+    </tr>
+</table>
+<br/>
+<form th:method="POST"  th:action="@{/logout}">
+    <input type="submit" value="  Выйти  "/>
 </form>
 </body>
 </html>

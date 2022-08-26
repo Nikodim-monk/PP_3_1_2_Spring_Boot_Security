@@ -19,6 +19,9 @@
     <form th:method="POST" th:action="@{{id}(id=${user.getId()})}">
         <input type="submit" value="Удалить"/>
     </form>
-
+    <br/>
+    <form th:method="POST"  th:action="@{/logout}">
+        <input type="submit" value="  Выйти  "/>
+    </form>
 </body>
 </html>

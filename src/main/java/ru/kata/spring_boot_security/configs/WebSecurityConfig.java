@@ -18,14 +18,10 @@ import ru.kata.spring_boot_security.service.UserService;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final  UserService userService;
-    private final SuccessUserHandler successUserHandler;
-
     @Autowired
-    public WebSecurityConfig(SuccessUserHandler successUserHandler, UserService userService) {
-        this.successUserHandler = successUserHandler;
-        this.userService = userService;
-    }
+    private  UserService userService;
+    @Autowired
+    private  SuccessUserHandler successUserHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
