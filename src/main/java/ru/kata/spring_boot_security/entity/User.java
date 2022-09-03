@@ -1,7 +1,6 @@
-package ru.kata.spring_boot_security.model;
+package ru.kata.spring_boot_security.entity;
 
 import lombok.Data;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;

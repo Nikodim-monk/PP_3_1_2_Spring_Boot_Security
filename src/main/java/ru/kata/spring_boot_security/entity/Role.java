@@ -1,4 +1,4 @@
-package ru.kata.spring_boot_security.model;
+package ru.kata.spring_boot_security.entity;
 
 import lombok.Data;
 

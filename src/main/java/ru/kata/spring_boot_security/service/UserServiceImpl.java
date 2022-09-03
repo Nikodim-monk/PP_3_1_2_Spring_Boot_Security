@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring_boot_security.model.Role;
-import ru.kata.spring_boot_security.model.User;
+import ru.kata.spring_boot_security.entity.Role;
+import ru.kata.spring_boot_security.entity.User;
 import ru.kata.spring_boot_security.repository.UserRepository;
 
 import java.util.Collection;
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     public User findByUsername(String name) {
-        return repository.findByname(name);
+        return repository.findByName(name);
     }
 
     public List<User> getAllUsers() {
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         repository.saveAndFlush(user);
     }
 
-    public void UserDelete(long id) {
+    public void userDelete(long id) {
         repository.deleteById(id);
     }
 }
